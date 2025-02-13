@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You're My Valentine! ❤️</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+      }
+      h1 {
+        color: #ff4d6d;
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      .image-container {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+      }
+      .valentine-img {
+        position: absolute;
+        opacity: 0;
+        transform: scale(0.5);
+        animation: popUp 1s ease-in-out forwards;
+        max-width: 100%;
+        width: 350px;
+        height: 250px;
+      }
+      .next-button {
+        margin: 20px;
+        padding: 15px 30px;
+        font-size: 20px;
+        background: linear-gradient(135deg, #ff4d6d, #ff758f);
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.3s;
+        box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        outline: none;
+      }
+
+      .next-button:hover {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #ff758f, #ff4d6d);
+        box-shadow: 0 8px 20px rgba(255, 77, 109, 0.5);
+      }
+
+      .next-button:active {
+        transform: scale(0.95);
+        box-shadow: 0 3px 10px rgba(255, 77, 109, 0.4);
+      }
+
+      @keyframes popUp {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector(".image-container");
+        const images = [
+          "images/IMG_6205.jpg",
+          "images/IMG_7105.jpg",
+          "images/IMG_8347.jpg",
+          "images/IMG_4535.jpg",
+        ];
+
+        const positions = [
+          { top: "10%", left: "10%" }, // Top-left corner
+          { top: "10%", right: "10%" }, // Top-right corner
+          { top: "50%", left: "20%", transform: "translateY(-50%)" }, // Moved further left
+          { top: "50%", left: "60%", transform: "translateY(-50%)" }, // Bottom-right
+        ];
+
+        images.forEach((src, index) => {
+          setTimeout(() => {
+            let img = document.createElement("img");
+            img.src = src;
+            img.classList.add("valentine-img");
+            let pos = positions[index];
+            img.style.top = pos.top;
+            img.style.left = pos.left || "auto";
+            img.style.right = pos.right || "auto";
+            if (pos.transform) img.style.transform = pos.transform;
+            img.style.animationDelay = `${index * 0.5}s`;
+            container.appendChild(img);
+          }, index * 500);
+        });
+      });
+      function goToNextPage() {
+        window.location.href = "note.html";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>You're My Valentine! ❤️</h1>
+    <div class="image-container"></div>
+    <button class="next-button" onclick="goToNextPage()">Next</button>
+  </body>
+</html>
